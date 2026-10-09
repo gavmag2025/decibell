@@ -15,6 +15,7 @@ export default function Header() {
         <a className="logo" href="#top" onClick={go('#top')} aria-label="Decibell home"><i /><i /><i /><i /><i /> <span>decibell</span></a>
         <nav className={menu ? 'open' : ''} aria-label="Main">
           <a href="#products" onClick={go('#products')}>Shop</a>
+          <a href="#/phones" onClick={() => setMenu(false)}>Phones</a>
           <a href="#tech" onClick={go('#tech')}>Technology</a>
           <a href="#compare" onClick={go('#compare')}>Compare</a>
           <a href="#faq" onClick={go('#faq')}>FAQ</a>

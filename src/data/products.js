@@ -38,17 +38,37 @@ export const products = [
     ports: 'USB 3.0 x2, USB 2.0 x2, HDMI x2, RJ45 x2, 3.5mm audio, DC',
     portCount: 9, options: '16GB / 512GB SSD',
     feats: ['16GB memory as standard', 'Two HDMI outputs, two LAN ports', 'Compact 12 cm footprint', 'Windows 11 Professional pre-installed'] },
-  { id: 'db6025', name: 'DB6025 4G', cat: 'Phones', badge: '4G', price: null, hue: 330,
-    tag: 'Big 5.99" screen Android smartphone with dual SIM.',
+  { id: 'db6025', name: 'DB6025', cat: 'Phones', badge: '3G', price: null, hue: 330,
+    tag: 'Big 5.99" Android 11 smartphone with dual SIM and GPS.',
     chip: 'SC7731E', ram: '2GB', storage: '16GB', os: 'Android 11', display: '5.99" FWVGA+ 480 x 960',
-    dims: '159.5 x 76.1 x 9.15 mm', bt: 'Bluetooth 4.2', ports: 'Dual SIM, FM radio, GPS',
-    camera: '8MP rear, 2MP front', battery: '3000mAh Li-ion', network: '3G or dual 4G (DB6025 4G)',
-    feats: ['Dual 4G SIM on the 4G model', 'GPS and FM radio', '8MP rear camera', '3000mAh battery'] },
+    dims: '159.5 x 76.1 x 9.15 mm', bt: 'Bluetooth 4.2', ports: 'Dual SIM, FM radio, GPS, flashlight',
+    camera: '8MP rear, 2MP front', battery: '3000mAh Li-ion', network: '3G',
+    sheet: '2025/04/Decibell-DB6025.pdf',
+    full: [['Model', 'Decibell DB6025'], ['Operating system', 'Android 11'], ['Display', '5.99-inch FWVGA+ 480 x 960'], ['Chipset', 'SC7731E'],
+      ['Memory', '2GB RAM + 16GB ROM'], ['Camera', '8MP rear / 2MP front'], ['Network', '3G'], ['SIM', 'Two SIM cards'],
+      ['Battery', '3000mAh Li-ion'], ['Bluetooth', '4.2'], ['GPS', 'Yes'], ['FM radio', 'Yes'], ['Flashlight', 'Yes, 130mA'],
+      ['Dimensions', '159.5 x 76.1 x 9.15 mm'], ['Weight', '188g']],
+    feats: ['5.99" display on a slim 9.15mm body', 'Dual SIM with GPS and FM radio', '8MP rear and 2MP front cameras', '3000mAh battery'] },
+  { id: 'db6025-4g', name: 'DB6025 4G', cat: 'Phones', badge: '4G', price: null, hue: 320,
+    tag: 'The DB6025 with dual 4G SIM support.',
+    chip: 'SC7731E', ram: '2GB', storage: '16GB', os: 'Android 11', display: '5.99" FWVGA+ 480 x 960',
+    dims: '159.5 x 76.1 x 9.15 mm', bt: 'Bluetooth 4.2', ports: 'Dual 4G SIM, FM radio, GPS, flashlight',
+    camera: '8MP rear, 2MP front', battery: '3000mAh Li-ion', network: '3G / 4G',
+    sheet: '2025/04/Decibell-DB6025-4G.pdf',
+    full: [['Model', 'Decibell DB6025-4G'], ['Operating system', 'Android 11'], ['Display', '5.99-inch FWVGA+ 480 x 960'], ['Chipset', 'SC7731E'],
+      ['Memory', '2GB RAM + 16GB ROM'], ['Camera', '8MP rear / 2MP front'], ['Network', '3G / 4G'], ['SIM', 'Dual 4G'],
+      ['Battery', '3000mAh Li-ion'], ['Bluetooth', '4.2'], ['GPS', 'Yes'], ['FM radio', 'Yes'], ['Flashlight', 'Yes, 130mA'],
+      ['Dimensions', '159.5 x 76.1 x 9.15 mm'], ['Weight', '188g']],
+    feats: ['Dual 4G SIM support', 'Android 11 with GPS and FM radio', '8MP rear and 2MP front cameras', '3000mAh battery'] },
   { id: 'db1723', name: 'DB1723', cat: 'Phones', badge: 'Feature phone', price: null, hue: 50,
     tag: 'Tough, simple dual-SIM feature phone with a torch.',
     chip: 'SC6531E', ram: '32MB', storage: '32MB ROM', os: 'Feature phone OS', display: '1.77" QQVGA 128 x 160',
-    dims: '113.5 x 48 x 14.3 mm', ports: 'Dual SIM, FM radio, flashlight',
+    dims: '113.5 x 4.8 x 14.3 mm (as printed on the sheet)', ports: 'Dual SIM, FM radio, flashlight',
     camera: '0.08MP', battery: '800mAh Li-ion', network: '2G 850/900/1800/1900',
+    sheet: '2025/03/Decibell-DB1723-Spec-Sheet.pdf',
+    full: [['Model', 'Decibell DB1723'], ['Display', '1.77-inch QQVGA 128 x 160'], ['Chipset', 'SC6531E'], ['Memory', '32MB RAM + 32MB ROM'],
+      ['Camera', '0.08MP'], ['Network', '2G 850 / 900 / 1800 / 1900'], ['SIM', 'Two SIM cards'], ['Battery', '800mAh Li-ion'],
+      ['GPS', 'No'], ['FM radio', 'Wireless FM'], ['Flashlight', 'Yes'], ['Dimensions', '113.5 x 4.8 x 14.3 mm (as printed on the sheet)'], ['Weight', '68g']],
     feats: ['Dual SIM', 'Wireless FM radio', 'Built-in flashlight', 'Light at 68g'] },
 ]
 export const isPhone = (p) => p.cat === 'Phones'
@@ -70,7 +90,9 @@ for (const p of products) {
   p.shot = `${base}img/${p.id}-shot.webp`
   p.img = NO_CUTOUT.includes(p.id) ? null : `${base}img/${p.id}.webp`
 }
+export const SHEET_BASE = 'https://decibell.co.za/wp-content/uploads/'
 export const specRows = (p) => {
+  if (p.full) return [...p.full, ['Warranty', '1 year standard'], ['Shipping', 'Free across South Africa']]
   const pc = !isPhone(p)
   return [
     [pc ? 'Processor' : 'Chipset', p.chip], ['Memory', p.ram], ['Storage', p.storage], ['Operating system', p.os],

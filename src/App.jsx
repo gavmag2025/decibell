@@ -8,6 +8,7 @@ import Tech from './components/Tech'
 import Products from './components/Products'
 import Compare from './components/Compare'
 import ProductPage from './components/ProductPage'
+import PhonesPage from './components/PhonesPage'
 import { useRoute } from './lib/route'
 import Cart from './components/Cart'
 import { FAQ, Contact, Footer } from './components/Footer'
@@ -17,7 +18,7 @@ export default function App() {
   useEffect(() => { const t = setTimeout(() => ScrollTrigger.refresh(), 400); return () => clearTimeout(t) }, [route.page, route.id])
   return (
     <CartProvider>
-      <Header /><main>{route.page === 'product' ? <><ProductPage id={route.id} /><Contact /></> : <><Hero /><Marquee /><Tech /><Products /><Compare /><FAQ /><Contact /></>}</main><Footer /><Cart />
+      <Header /><main>{route.page === 'phones' ? <><PhonesPage /><Contact /></> : route.page === 'product' ? <><ProductPage id={route.id} /><Contact /></> : <><Hero /><Marquee /><Tech /><Products /><Compare /><FAQ /><Contact /></>}</main><Footer /><Cart />
     </CartProvider>
   )
 }

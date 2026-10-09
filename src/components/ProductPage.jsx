@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, reduced, scrollToTop } from '../lib/motion'
 import { isPhone, meters, money, products, specRows } from '../data/products'
 import Buy from './Buy'
+import { SHEET_BASE } from '../data/products'
 import { productHref } from '../lib/route'
 import { useCart } from '../lib/cart'
 import Photo from './Photo'
@@ -28,7 +29,7 @@ export default function ProductPage({ id }) {
   return (
     <div className="pp" ref={root}>
       <section className="sec">
-        <nav className="crumbs" aria-label="Breadcrumb"><a href="#top">Home</a> / <a href="#products">Shop</a> / <span>{p.name}</span></nav>
+        <nav className="crumbs" aria-label="Breadcrumb"><a href="#top">Home</a> / {isPhone(p) ? <a href="#/phones">Phones</a> : <a href="#products">Shop</a>} / <span>{p.name}</span></nav>
         <div className="pp-top">
           <div className="pp-gal">
             <Photo p={p} shot={cur.light} eager className="pp-main" />
@@ -39,7 +40,7 @@ export default function ProductPage({ id }) {
             <h1>{p.name}</h1>
             <p className="lead">{p.tag}</p>
             <p className="price big">{money(p.price)}</p>
-            <div className="cta"><Buy p={p} /><a className="btn ghost" href="#contact">Ask a question</a></div>
+            <div className="cta"><Buy p={p} /><a className="btn ghost" href="#contact">Ask a question</a>{p.sheet && <a className="btn ghost" href={SHEET_BASE + p.sheet} target="_blank" rel="noopener">Spec sheet (PDF)</a>}</div>
             <ul className="trust"><li>Free shipping &amp; returns</li><li>1-year warranty</li><li>Available via retail partners</li></ul>
             <p className="muted small">Indicative SA retail price incl. VAT; confirm before ordering. Photos &amp; product names belong to Decibell.</p>
           </div>

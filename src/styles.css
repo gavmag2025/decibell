@@ -125,3 +125,8 @@ a.btn{display:inline-block;text-decoration:none}
 .hot i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--ac)}
 @media(max-width:860px){.hchip{font-size:.68rem;padding:.35rem .55rem}.hchip.c0{left:0}.hchip.c1{right:0}.rig{width:min(420px,100%)}}
 html,body{overflow-x:clip}.hero,.tech{overflow-x:clip}
+.ph-head h1{font-size:clamp(2.4rem,6vw,4.4rem);margin:.4rem 0 .8rem}.ph-head .lead{max-width:40rem;color:var(--mut);font-size:1.15rem;margin-bottom:2.5rem}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--bg2)}
+.ph-table{min-width:640px;font-size:.95rem}.ph-table th,.ph-table td{padding:.8rem 1.1rem;text-align:left;vertical-align:top;width:auto}
+.ph-table thead th{color:var(--ac);font:500 .85rem 'JetBrains Mono',monospace;border-bottom:1px solid var(--line)}
+.ph-table tbody th{color:var(--mut);font-weight:400;width:22%}
