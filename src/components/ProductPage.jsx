@@ -1,13 +1,12 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, reduced, scrollToTop } from '../lib/motion'
-import { money, products } from '../data/products'
+import { isPhone, meters, money, products, specRows } from '../data/products'
+import Buy from './Buy'
 import { productHref } from '../lib/route'
 import { useCart } from '../lib/cart'
 import Photo from './Photo'
-const bars = [['cpu', 'CPU power'], ['gpu', 'Graphics'], ['cool', 'Cooling'], ['quiet', 'Quietness']]
 export default function ProductPage({ id }) {
   const p = products.find((x) => x.id === id)
-  const { add } = useCart()
   const [view, setView] = useState(0)
   const root = useRef()
   useLayoutEffect(() => {
@@ -23,7 +22,7 @@ export default function ProductPage({ id }) {
   }, [id])
   if (!p) return <section className="sec"><h2>Product not found</h2><a className="btn" href="#products">Back to shop</a></section>
   const related = products.filter((x) => x.id !== p.id && x.cat === p.cat).concat(products.filter((x) => x.id !== p.id && x.cat !== p.cat)).slice(0, 3)
-  const specs = [['Processor', p.chip], ['Memory', p.ram], ['Storage', p.storage], [p.cat === 'Phones' ? 'Display' : 'Graphics', p.gpu], ['Ports', p.ports], ['Warranty', '1 year standard'], ['Shipping', 'Free across South Africa']]
+  const specs = specRows(p)
   const views = [p.img ? { src: p.img, light: false } : null, { src: p.shot, light: true }].filter(Boolean)
   const cur = views[Math.min(view, views.length - 1)]
   return (
@@ -39,16 +38,16 @@ export default function ProductPage({ id }) {
             <p className="eyebrow">{p.cat}{p.badge ? ` · ${p.badge}` : ''}</p>
             <h1>{p.name}</h1>
             <p className="lead">{p.tag}</p>
-            <p className="price big">{money(p.price)} {p.was && <s>{money(p.was)}</s>}</p>
-            <div className="cta"><button className="btn" onClick={() => add(p.id)}>Add to cart</button><a className="btn ghost" href="#contact">Ask a question</a></div>
-            <ul className="trust"><li>Free shipping &amp; returns</li><li>1-year warranty</li><li>In stock at retail partners</li></ul>
-            <p className="muted small">Demo pricing. Photos &amp; product names belong to Decibell.</p>
+            <p className="price big">{money(p.price)}</p>
+            <div className="cta"><Buy p={p} /><a className="btn ghost" href="#contact">Ask a question</a></div>
+            <ul className="trust"><li>Free shipping &amp; returns</li><li>1-year warranty</li><li>Available via retail partners</li></ul>
+            <p className="muted small">Indicative SA retail price incl. VAT; confirm before ordering. Photos &amp; product names belong to Decibell.</p>
           </div>
         </div>
       </section>
       <section className="sec pp-grid">
         <div><h2>Specifications</h2><table><tbody>{specs.map(([k, v]) => <tr key={k}><th>{k}</th><td>{v}</td></tr>)}</tbody></table></div>
-        <div><h2>Performance</h2>{bars.map(([k, l]) => <div key={k} className="meter" style={{ '--h': p.hue }}><span>{l}<b>{p.perf[k]}</b></span><div className="track"><div className="fill" style={{ width: p.perf[k] + '%' }} /></div></div>)}</div>
+        <div><h2>Performance</h2>{isPhone(p) ? <p className="muted">Full spec sheet available on request.</p> : <>{meters(p).map(([l, v]) => <div key={l} className="meter" style={{ '--h': p.hue }}><span>{l}<b>{v}</b></span><div className="track"><div className="fill" style={{ width: v + '%' }} /></div></div>)}<p className="muted small">Memory, storage and ports scale from the spec sheet; processor class is an estimate, not a benchmark.</p></>}</div>
       </section>
       <section className="sec pp-feat"><h2>Why you'll love it</h2><ul>{p.feats.map((f, i) => <li key={f}><span className="mono">0{i + 1}</span>{f}</li>)}</ul></section>
       <section className="sec"><h2>You may also like</h2>

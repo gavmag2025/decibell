@@ -1,12 +1,13 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, reduced } from '../lib/motion'
-import { CATEGORIES, money, products } from '../data/products'
+import { CATEGORIES, isPhone, money, products, specRows } from '../data/products'
+import Buy from './Buy'
 import { useCart } from '../lib/cart'
 import Photo from './Photo'
 import { productHref } from '../lib/route'
 
 function Card({ p, onOpen }) {
-  const { add, compare, toggleCompare } = useCart()
+  const { compare, toggleCompare } = useCart()
   const ref = useRef()
   const tilt = (e) => {
     if (reduced()) return
@@ -20,11 +21,11 @@ function Card({ p, onOpen }) {
       <a className="thumb" href={productHref(p.id)} aria-label={`View ${p.name}`}><Photo p={p} /></a>
       <h3><a href={productHref(p.id)}>{p.name}</a></h3>
       <p className="mono spec">{p.chip} · {p.ram} · {p.storage}</p>
-      <p className="price">{money(p.price)} {p.was && <s>{money(p.was)}</s>}</p>
+      <p className="price">{p.price == null ? <span className="muted">{money(p.price)}</span> : money(p.price)}</p>
       <div className="row">
-        <button className="btn sm" onClick={() => add(p.id)}>Add to cart</button>
+        <Buy p={p} small />
         <a className="btn sm ghost" href={productHref(p.id)}>Details</a>
-        <label className="cmp"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} /> Compare</label>
+        {!isPhone(p) && <label className="cmp"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} /> Compare</label>}
       </div>
     </article>
   )
@@ -35,7 +36,6 @@ export default function Products() {
   const [sort, setSort] = useState('feat')
   const [open, setOpen] = useState(null)
   const root = useRef()
-  const { add } = useCart()
   let list = products.filter((p) => cat === 'All' || p.cat === cat)
   if (sort === 'lo') list = [...list].sort((a, b) => a.price - b.price)
   if (sort === 'hi') list = [...list].sort((a, b) => b.price - a.price)
@@ -64,9 +64,9 @@ export default function Products() {
             <div>
               <p className="eyebrow">{open.cat}</p><h3>{open.name}</h3><p>{open.tag}</p>
               <ul>{open.feats.map((f) => <li key={f}>{f}</li>)}</ul>
-              <table><tbody>{[['Processor', open.chip], ['Memory', open.ram], ['Storage', open.storage], ['Graphics / display', open.gpu], ['Ports', open.ports]].map(([k, v]) => <tr key={k}><th>{k}</th><td>{v}</td></tr>)}</tbody></table>
+              <table><tbody>{specRows(open).slice(0, 6).map(([k, v]) => <tr key={k}><th>{k}</th><td>{v}</td></tr>)}</tbody></table>
               <p className="price big">{money(open.price)}</p>
-              <button className="btn" onClick={() => { add(open.id); setOpen(null) }}>Add to cart</button>
+              <Buy p={open} onDone={() => setOpen(null)} />
             </div>
           </div>
         </div>

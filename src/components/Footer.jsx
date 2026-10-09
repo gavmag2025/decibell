@@ -2,7 +2,7 @@ import { useState } from 'react'
 const faqs = [
   ['What warranty do Decibell mini PCs have?', 'Every device carries a standard 1-year warranty, with an extended warranty option available.'],
   ['Is shipping free?', 'Yes, free shipping and returns across South Africa.'],
-  ['Which operating system do they run?', 'Windows 11 is supported out of the box and most models also run Linux.'],
+  ['Which operating system do they run?', 'Every Decibell mini PC ships with Windows 11 Professional pre-installed.'],
   ['Where can I buy in store?', 'Decibell is available at major retail partners. Contact us for your nearest stockist.'],
   ['Can I download drivers?', 'Yes. Drivers and spec sheets are available per model, ask support@decibell.co.za.'],
 ]

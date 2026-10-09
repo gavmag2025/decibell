@@ -1,47 +1,81 @@
-// DEMO DATA: prices and some specs are placeholders, not Decibell's real pricing.
-export const CATEGORIES = ['All', 'Gaming', 'Office', 'Creator', 'Phones']
+// Specs: Decibell's official spec sheets (decibell.co.za, 2024/2025).
+// Prices: indicative South African retail prices incl. VAT (pcinternational.co.za, pricecheck.co.za, Oct 2026).
+// Retail prices change, so confirm before selling. Phones had no public price: shown as price on request.
+export const CATEGORIES = ['All', 'Performance', 'Everyday', 'Phones']
 export const products = [
-  { id: 'am02-pro', name: 'AM02 Pro', cat: 'Gaming', badge: 'Flagship', price: 18999, was: 21999, hue: 190,
-    tag: 'Desktop-class gaming in a palm-sized chassis.',
-    chip: 'AMD Ryzen 7 8845HS', ram: '32GB DDR5', storage: '1TB NVMe', gpu: 'Radeon 780M', ports: 'USB4, HDMI 2.1, 2.5G LAN',
-    perf: { cpu: 94, gpu: 82, cool: 88, quiet: 80 },
-    feats: ['8-core Zen 4 with 16 threads', 'Dual-fan vapour chamber cooling', 'Drives 4 displays up to 8K', 'WiFi 6E + Bluetooth 5.3'] },
-  { id: 'gk3', name: 'GK3', cat: 'Office', badge: 'Best seller', price: 5499, was: 6299, hue: 210,
-    tag: 'The silent workhorse for every desk.',
-    chip: 'Intel N100', ram: '16GB DDR4', storage: '512GB SSD', gpu: 'Intel UHD', ports: 'HDMI x2, USB 3.2, Gigabit LAN',
-    perf: { cpu: 52, gpu: 40, cool: 70, quiet: 96 },
-    feats: ['Fanless-quiet under office loads', 'VESA mount in the box', 'Sips under 15W', 'Windows 11 Pro ready'] },
-  { id: 'n3a', name: 'N3A', cat: 'Office', badge: 'Value', price: 3999, price_note: '', was: null, hue: 160,
-    tag: 'Everything you need, nothing you do not.',
-    chip: 'Intel N95', ram: '8GB DDR4', storage: '256GB SSD', gpu: 'Intel UHD', ports: 'HDMI, USB 3.0 x3, Gigabit LAN',
-    perf: { cpu: 44, gpu: 34, cool: 66, quiet: 92 },
-    feats: ['Ultra compact 12cm footprint', 'Dual display output', 'Expandable storage slot', 'Ideal for schools and shops'] },
-  { id: 'ad15', name: 'AD15', cat: 'Creator', badge: 'New', price: 12499, was: 13999, hue: 280,
-    tag: 'Edit, render and stream without the tower.',
-    chip: 'Intel Core i5-12450H', ram: '16GB DDR5', storage: '1TB NVMe', gpu: 'Intel UHD Xe', ports: 'Thunderbolt 4, HDMI, 2.5G LAN',
-    perf: { cpu: 76, gpu: 58, cool: 82, quiet: 78 },
-    feats: ['12 cores for fast timeline scrubbing', 'Thunderbolt 4 for fast external drives', 'Dual NVMe slots', 'Hardware AV1 decode'] },
-  { id: 's1', name: 'S1 Intel', cat: 'Creator', badge: '', price: 8999, was: null, hue: 30,
-    tag: 'Balanced power for multitasking pros.',
-    chip: 'Intel Core i3-N305', ram: '16GB DDR5', storage: '512GB NVMe', gpu: 'Intel UHD', ports: 'HDMI 2.0, USB-C, 2.5G LAN',
-    perf: { cpu: 60, gpu: 44, cool: 74, quiet: 88 },
-    feats: ['8 efficient cores', 'Triple 4K output', 'WiFi 6 + BT 5.2', 'Aluminium unibody'] },
-  { id: 'db6025', name: 'DB6025 4G', cat: 'Phones', badge: '4G', price: 2299, was: 2599, hue: 330,
-    tag: 'Big screen smartphone, big battery.',
-    chip: 'Octa-core 4G', ram: '4GB', storage: '128GB', gpu: '6.5" HD+', ports: 'USB-C, dual SIM, microSD',
-    perf: { cpu: 36, gpu: 30, cool: 60, quiet: 90 },
-    feats: ['5000mAh battery', 'Dual SIM + microSD', 'Face unlock', '13MP dual camera'] },
-  { id: 'db1723', name: 'DB1723', cat: 'Phones', badge: 'Feature phone', price: 499, was: null, hue: 50,
-    tag: 'Tough, simple, days of standby.',
-    chip: 'Feature OS', ram: '32MB', storage: '32GB card', gpu: '2.4" display', ports: 'Micro-USB, dual SIM',
-    perf: { cpu: 10, gpu: 5, cool: 60, quiet: 90 },
-    feats: ['Weeks of standby', 'Torch + FM radio', 'Dual SIM', 'Loud speaker'] },
+  { id: 'am02-pro', name: 'AM02 Pro', cat: 'Performance', badge: 'Flagship', price: 8394, hue: 190, cpuScore: 82,
+    tag: 'Ryzen 7 power in a 12 cm box, with USB-C and DisplayPort.',
+    chip: 'AMD Ryzen 7 5875U', ram: '16GB', storage: '1TB SSD', os: 'Windows 11 Pro',
+    dims: '123.5 x 123.5 x 40 mm', bt: 'Bluetooth 4.2 / 5.2',
+    ports: 'USB 3.0 x3, USB 2.0 x1, USB-C, HDMI, DisplayPort, RJ45, 3.5mm audio, DC',
+    portCount: 9, options: '16GB / 512GB or 16GB / 1TB SSD',
+    feats: ['8-core, 16-thread Ryzen 7 processor', 'Dual display out: HDMI plus DisplayPort', 'USB-C and four USB-A ports', 'Windows 11 Professional pre-installed'] },
+  { id: 'ad15', name: 'AD15', cat: 'Performance', badge: 'Core i9', price: 8259, hue: 280, cpuScore: 90,
+    tag: 'Intel Core i9 muscle for demanding desktop work.',
+    chip: 'Intel Core i9-11900H', ram: '16GB', storage: '1TB SSD', os: 'Windows 11 Pro',
+    dims: '128 x 128 x 41.3 mm', bt: 'Bluetooth 5.0',
+    ports: 'USB 3.0 x4, HDMI x2, RJ45, 3.5mm audio, DC',
+    portCount: 8, options: '16GB / 512GB or 16GB / 1TB SSD',
+    feats: ['8-core, 16-thread i9 processor', 'Dual HDMI for two displays', 'Four USB 3.0 ports', 'Windows 11 Professional pre-installed'] },
+  { id: 'gk3', name: 'GK3', cat: 'Everyday', badge: 'Best seller', price: 5749, hue: 210, cpuScore: 42,
+    tag: 'Dual-LAN, dual-HDMI workhorse for offices and shops.',
+    chip: 'Intel Alder Lake-N N97', ram: '8GB', storage: '256GB SSD', os: 'Windows 11 Pro',
+    dims: '130 x 130 x 47.5 mm', bt: 'Bluetooth 4.2 / 5.2',
+    ports: 'USB 3.0 x2, USB 2.0 x2, HDMI 2.0 x2, RJ45 x2, 3.5mm audio, DC',
+    portCount: 9, options: '8GB / 256GB SSD',
+    feats: ['Two gigabit LAN ports', 'Two HDMI 2.0 outputs', 'Low-power Alder Lake-N chip', 'Windows 11 Professional pre-installed'] },
+  { id: 'n3a', name: 'N3A', cat: 'Everyday', badge: 'Intel i3', price: 5750, hue: 160, cpuScore: 55,
+    tag: 'Core i3 speed with USB-C and DisplayPort.',
+    chip: 'Intel Core i3-1215U', ram: '8GB', storage: '256GB SSD', os: 'Windows 11 Pro',
+    dims: '128 x 128 x 41.3 mm', bt: 'Bluetooth 4.2 / 5.2',
+    ports: 'USB 3.0 x4, USB 2.0 x2, USB-C, HDMI, DisplayPort, RJ45, 3.5mm audio, DC',
+    portCount: 11, options: '8GB / 256GB or 16GB / 512GB SSD',
+    feats: ['12th-gen Intel Core processor', 'Six USB-A ports plus USB-C', 'HDMI and DisplayPort outputs', 'Windows 11 Professional pre-installed'] },
+  { id: 's1', name: 'S1 Intel', cat: 'Everyday', badge: 'Value', price: 4199, hue: 30, cpuScore: 45,
+    tag: 'The affordable all-rounder with 16GB as standard.',
+    chip: 'Intel Alder Lake N150', ram: '16GB', storage: '512GB SSD', os: 'Windows 11 Pro',
+    dims: '124 x 126 x 41.7 mm', bt: 'Bluetooth 4.2 / 5.2',
+    ports: 'USB 3.0 x2, USB 2.0 x2, HDMI x2, RJ45 x2, 3.5mm audio, DC',
+    portCount: 9, options: '16GB / 512GB SSD',
+    feats: ['16GB memory as standard', 'Two HDMI outputs, two LAN ports', 'Compact 12 cm footprint', 'Windows 11 Professional pre-installed'] },
+  { id: 'db6025', name: 'DB6025 4G', cat: 'Phones', badge: '4G', price: null, hue: 330,
+    tag: 'Big 5.99" screen Android smartphone with dual SIM.',
+    chip: 'SC7731E', ram: '2GB', storage: '16GB', os: 'Android 11', display: '5.99" FWVGA+ 480 x 960',
+    dims: '159.5 x 76.1 x 9.15 mm', bt: 'Bluetooth 4.2', ports: 'Dual SIM, FM radio, GPS',
+    camera: '8MP rear, 2MP front', battery: '3000mAh Li-ion', network: '3G or dual 4G (DB6025 4G)',
+    feats: ['Dual 4G SIM on the 4G model', 'GPS and FM radio', '8MP rear camera', '3000mAh battery'] },
+  { id: 'db1723', name: 'DB1723', cat: 'Phones', badge: 'Feature phone', price: null, hue: 50,
+    tag: 'Tough, simple dual-SIM feature phone with a torch.',
+    chip: 'SC6531E', ram: '32MB', storage: '32MB ROM', os: 'Feature phone OS', display: '1.77" QQVGA 128 x 160',
+    dims: '113.5 x 48 x 14.3 mm', ports: 'Dual SIM, FM radio, flashlight',
+    camera: '0.08MP', battery: '800mAh Li-ion', network: '2G 850/900/1800/1900',
+    feats: ['Dual SIM', 'Wireless FM radio', 'Built-in flashlight', 'Light at 68g'] },
 ]
-export const money = (n) => 'R ' + n.toLocaleString('en-ZA')
-
+export const isPhone = (p) => p.cat === 'Phones'
+export const money = (n) => (n == null ? 'Price on request' : 'R ' + n.toLocaleString('en-ZA'))
+const num = (s) => parseFloat(s)
+// Meters: CPU class is our estimate; memory/storage/ports come straight from the spec.
+export const meters = (p) => {
+  const gb = (s) => (/TB/.test(s) ? num(s) * 1024 : num(s))
+  return [
+    ['Processor class (est.)', p.cpuScore || 0],
+    ['Memory', Math.min(100, Math.round((gb(p.ram) / 32) * 100))],
+    ['Storage', Math.min(100, Math.round((gb(p.storage) / 1024) * 100))],
+    ['Ports', Math.min(100, Math.round((p.portCount || 0) / 11 * 100))],
+  ]
+}
 const NO_CUTOUT = ['db1723']
 const base = import.meta.env.BASE_URL
 for (const p of products) {
   p.shot = `${base}img/${p.id}-shot.webp`
   p.img = NO_CUTOUT.includes(p.id) ? null : `${base}img/${p.id}.webp`
+}
+export const specRows = (p) => {
+  const pc = !isPhone(p)
+  return [
+    [pc ? 'Processor' : 'Chipset', p.chip], ['Memory', p.ram], ['Storage', p.storage], ['Operating system', p.os],
+    p.display && ['Display', p.display], p.camera && ['Camera', p.camera], p.battery && ['Battery', p.battery], p.network && ['Network', p.network],
+    ['Ports / features', p.ports], p.bt && ['Bluetooth', p.bt], ['Dimensions', p.dims],
+    p.options && ['Configurations', p.options], ['Warranty', '1 year standard'], ['Shipping', 'Free across South Africa'],
+  ].filter(Boolean)
 }
