@@ -89,3 +89,22 @@ footer{border-top:1px solid var(--line);padding:3rem 1.25rem;display:grid;grid-t
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .card{display:flex;flex-direction:column}.card .row{margin-top:auto;padding-top:.9rem}
+/* photos + product page */
+.photo{position:relative;display:grid;place-items:center;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 60%,hsl(var(--h) 100% 50%/.22),transparent 65%),#080a10}
+.photo img{width:100%;height:100%;object-fit:contain;transition:transform .6s cubic-bezier(.2,.8,.2,1);padding:6%}
+.card:hover .photo img{transform:scale(1.07) translateZ(30px)}
+.photo.light{background:#fff}.photo.light img{padding:2%}
+.thumb{display:block}.card h3 a{text-decoration:none}.card h3 a:hover{color:var(--ac)}
+a.btn{display:inline-block;text-decoration:none}
+.pp{padding-top:7.5rem}.crumbs{color:var(--mut);font-size:.85rem;margin-bottom:1.5rem}.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--ac)}.crumbs span{color:var(--tx)}
+.pp .sec{padding-top:2rem;padding-bottom:3rem}
+.pp-top{display:grid;grid-template-columns:1.15fr 1fr;gap:3rem;align-items:center}
+.pp-main{aspect-ratio:1/1;border:1px solid var(--line);border-radius:var(--r)}
+.thumbs{display:flex;gap:.7rem;margin-top:.8rem}.thumbs button{width:84px;height:64px;border-radius:10px;border:1px solid var(--line);background:#0b0d14;padding:4px;overflow:hidden}.thumbs button.on{border-color:var(--ac)}.thumbs img{width:100%;height:100%;object-fit:contain}
+.pp-info h1{font-size:clamp(2.4rem,5vw,4rem);margin:.3rem 0 .6rem}.lead{color:var(--mut);font-size:1.15rem}
+.trust{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;list-style:none;padding:0;margin:1.4rem 0;color:var(--mut);font-size:.9rem}.trust li::before{content:'✓ ';color:var(--ac)}
+.pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.pp-feat ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.pp-feat li{border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;background:var(--bg2);font-size:1.1rem}.pp-feat .mono{display:block;color:var(--ac);font-size:.8rem;margin-bottom:.6rem}
+.card.rel{text-decoration:none;display:block}
+@media(max-width:860px){.pp-top,.pp-grid{grid-template-columns:1fr}.pp{padding-top:8.5rem}}

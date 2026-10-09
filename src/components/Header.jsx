@@ -4,7 +4,10 @@ import { scrollToEl } from '../lib/motion'
 export default function Header() {
   const { count, setOpen } = useCart()
   const [menu, setMenu] = useState(false)
-  const go = (s) => (e) => { e.preventDefault(); setMenu(false); scrollToEl(s) }
+  const go = (s) => (e) => {
+    e.preventDefault(); setMenu(false)
+    if (location.hash.startsWith('#/')) { history.pushState(null, '', location.pathname); dispatchEvent(new HashChangeEvent('hashchange')); setTimeout(() => scrollToEl(s), 150) } else scrollToEl(s)
+  }
   return (
     <header className="hdr">
       <div className="promo">Free shipping &amp; returns across South Africa · 1-year warranty · <b>Demo store</b></div>

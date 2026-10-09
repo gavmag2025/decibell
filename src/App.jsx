@@ -7,13 +7,17 @@ import Marquee from './components/Marquee'
 import Tech from './components/Tech'
 import Products from './components/Products'
 import Compare from './components/Compare'
+import ProductPage from './components/ProductPage'
+import { useRoute } from './lib/route'
 import Cart from './components/Cart'
 import { FAQ, Contact, Footer } from './components/Footer'
 export default function App() {
-  useEffect(() => { initSmoothScroll(); const t = setTimeout(() => ScrollTrigger.refresh(), 400); return () => clearTimeout(t) }, [])
+  const route = useRoute()
+  useEffect(() => { initSmoothScroll() }, [])
+  useEffect(() => { const t = setTimeout(() => ScrollTrigger.refresh(), 400); return () => clearTimeout(t) }, [route.page, route.id])
   return (
     <CartProvider>
-      <Header /><main><Hero /><Marquee /><Tech /><Products /><Compare /><FAQ /><Contact /></main><Footer /><Cart />
+      <Header /><main>{route.page === 'product' ? <><ProductPage id={route.id} /><Contact /></> : <><Hero /><Marquee /><Tech /><Products /><Compare /><FAQ /><Contact /></>}</main><Footer /><Cart />
     </CartProvider>
   )
 }

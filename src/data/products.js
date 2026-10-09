@@ -38,3 +38,10 @@ export const products = [
     feats: ['Weeks of standby', 'Torch + FM radio', 'Dual SIM', 'Loud speaker'] },
 ]
 export const money = (n) => 'R ' + n.toLocaleString('en-ZA')
+
+const NO_CUTOUT = ['db1723']
+const base = import.meta.env.BASE_URL
+for (const p of products) {
+  p.shot = `${base}img/${p.id}-shot.webp`
+  p.img = NO_CUTOUT.includes(p.id) ? null : `${base}img/${p.id}.webp`
+}

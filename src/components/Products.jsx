@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, reduced } from '../lib/motion'
 import { CATEGORIES, money, products } from '../data/products'
 import { useCart } from '../lib/cart'
-import MiniPC from './MiniPC'
+import Photo from './Photo'
+import { productHref } from '../lib/route'
 
 function Card({ p, onOpen }) {
   const { add, compare, toggleCompare } = useCart()
@@ -16,13 +17,13 @@ function Card({ p, onOpen }) {
   return (
     <article className="card" ref={ref} onPointerMove={tilt} onPointerLeave={reset} style={{ '--h': p.hue }}>
       {p.badge && <span className="badge">{p.badge}</span>}
-      <button className="thumb" onClick={() => onOpen(p)} aria-label={`View ${p.name}`}><MiniPC hue={p.hue} id={p.id} /></button>
-      <h3>{p.name}</h3>
+      <a className="thumb" href={productHref(p.id)} aria-label={`View ${p.name}`}><Photo p={p} /></a>
+      <h3><a href={productHref(p.id)}>{p.name}</a></h3>
       <p className="mono spec">{p.chip} · {p.ram} · {p.storage}</p>
       <p className="price">{money(p.price)} {p.was && <s>{money(p.was)}</s>}</p>
       <div className="row">
         <button className="btn sm" onClick={() => add(p.id)}>Add to cart</button>
-        <button className="btn sm ghost" onClick={() => onOpen(p)}>Details</button>
+        <a className="btn sm ghost" href={productHref(p.id)}>Details</a>
         <label className="cmp"><input type="checkbox" checked={compare.includes(p.id)} onChange={() => toggleCompare(p.id)} /> Compare</label>
       </div>
     </article>
@@ -59,7 +60,7 @@ export default function Products() {
         <div className="modal" role="dialog" aria-modal="true" aria-label={open.name} onClick={() => setOpen(null)}>
           <div className="mbox" onClick={(e) => e.stopPropagation()}>
             <button className="x" onClick={() => setOpen(null)} aria-label="Close">×</button>
-            <MiniPC hue={open.hue} id={'m' + open.id} />
+            <Photo p={open} />
             <div>
               <p className="eyebrow">{open.cat}</p><h3>{open.name}</h3><p>{open.tag}</p>
               <ul>{open.feats.map((f) => <li key={f}>{f}</li>)}</ul>

@@ -4,6 +4,8 @@ A modern mini PC storefront concept for Decibell (South Africa), built with **Re
 
 > Demo only. Products, prices and specs are placeholders and this is not the official Decibell site.
 
+Photos are Decibell's own product images (from decibell.co.za), stored in `public/img`. Product pages live at `#/product/<id>`.
+
 Features: animated hero, pinned scroll-driven tech story, filterable/sortable product grid with 3D tilt cards, product detail modal, compare tool, persistent cart drawer with WhatsApp checkout, FAQ and contact form. Respects `prefers-reduced-motion`.
 
 ```bash
